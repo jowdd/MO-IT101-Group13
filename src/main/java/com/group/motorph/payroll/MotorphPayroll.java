@@ -277,7 +277,7 @@ public class MotorphPayroll {
         double sss = 0.0;
         
         // Path for the sss contribution range file
-        String sssTablePath = Paths.get("src", "main", "java", "com", "group", "motorph", "data", "sss-contribution-table.tsv").toString();
+        String sssTablePath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "sss-contribution-table.tsv").toString();
         
         // Read the file
         try (BufferedReader br = new BufferedReader(new FileReader(sssTablePath))) {
@@ -431,7 +431,7 @@ public class MotorphPayroll {
     // Function to scan and store the targeted employee id
     static String scanEmployeeId() {
         
-        String employeeDataPath = Paths.get("src", "main", "java", "com", "group", "motorph", "data", "employee-data.tsv").toString();
+        String employeeDataPath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "employee-data.tsv").toString();
         
         Scanner scanner = new Scanner(System.in); // Scanner to scan user input
         boolean isEmployeeInTheRecord; // To store bollean if employee Id is in the record
@@ -462,8 +462,8 @@ public class MotorphPayroll {
     public static void main(String[] args) {
         
         // Path for attenance record and employee data
-        String attendanceRecordPath = Paths.get("src", "main", "java", "com", "group", "motorph", "data", "attendance-record.csv").toString();
-        String employeeDataPath = Paths.get("src", "main", "java", "com", "group", "motorph", "data", "employee-data.tsv").toString();
+        String attendanceRecordPath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "attendance-record.csv").toString();
+        String employeeDataPath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "employee-data.tsv").toString();
 
         // Ask user to input employee id, scan it and store as the target employee id
         String targetEmployeeId = scanEmployeeId();
