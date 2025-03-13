@@ -465,22 +465,46 @@ public class MotorphPayroll {
         String attendanceRecordPath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "attendance-record.csv").toString();
         String employeeDataPath = Paths.get("src", "main", "java", "com", "group", "motorph", "resources", "employee-data.tsv").toString();
 
-        // Ask user to input employee id, scan it and store as the target employee id
-        String targetEmployeeId = scanEmployeeId();
-        
-        // Use the storeTimeSheet to store the all the time sheet
-        storeTimeSheet(attendanceRecordPath, targetEmployeeId);
-        // Use the storeEmployeeData to store the employee data
-        storeEmployeeData(employeeDataPath, targetEmployeeId); 
+        boolean isLoggedIn = true;
 
-        // Print employee details such as employee id, name, birthay, status, position
-        printEmployeeDetails();
+        Scanner scanner = new Scanner(System.in);
         
-        // Calculate weekly totals
-        calculateWeeklyTotals(timeSheet);
         
-        //  Print caculate and print salary details
-        caculatePrintSalary();
+        while (isLoggedIn) {
+            
+            // Ask user to input employee id, scan it and store as the target employee id
+            String targetEmployeeId = scanEmployeeId();
+            
+            // Use the storeTimeSheet to store the all the time sheet
+            storeTimeSheet(attendanceRecordPath, targetEmployeeId);
+            // Use the storeEmployeeData to store the employee data
+            storeEmployeeData(employeeDataPath, targetEmployeeId); 
+    
+            // Print employee details such as employee id, name, birthay, status, position
+            printEmployeeDetails();
+            
+            // Calculate weekly totals
+            calculateWeeklyTotals(timeSheet);
+            
+            //  Print caculate and print salary details
+            caculatePrintSalary();
+            
+                System.out.print("Do you want to view other employee's salary? (Y/N): ");
+                String userResponse = scanner.nextLine().trim(); // Trim to remove unnecessary spaces
+                
+                if (userResponse.equalsIgnoreCase("Y")) {
+                    isLoggedIn = true;
+                } else if (userResponse.equalsIgnoreCase("N")) {
+                    isLoggedIn = false;
+                } else {
+                    while (!userResponse.equalsIgnoreCase("Y") && !userResponse.equalsIgnoreCase("N")) {
+                        System.out.print("Invalid input. Please enter 'Y' or 'N': ");
+                        userResponse = scanner.nextLine().trim(); // Scan and trim input again
+                    }
+                    isLoggedIn = userResponse.equalsIgnoreCase("Y");
+                }   
+                
+        }
         
     }
 }
