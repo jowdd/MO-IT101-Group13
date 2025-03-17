@@ -118,7 +118,7 @@ public class MotorphPayroll {
                              
                 
                 //Create time log entry
-                TimeLogDetails entry = new TimeLogDetails(employeeId, lastName, firstName, date, logIn, logOut, hoursWorked, lateHours, overTime, weekNumber);
+                TimeLogDetails entry = new TimeLogDetails(employeeId, lastName, firstName, date, logIn, logOut, hoursWorked, overTime, weekNumber);
                 
                 // Store each entry in the timeSheet array list
                 timeSheet.add(entry);
@@ -206,7 +206,7 @@ public class MotorphPayroll {
     };
     
     
-    // Function to calculate the weekly total of hours worked, lates, and overtime
+    // Function to calculate the weekly total of hours worked, and overtime
     static void calculateWeeklyTotals (ArrayList<TimeLogDetails> timeSheet) {
         
         timeSheet.forEach(log -> {
@@ -239,7 +239,6 @@ public class MotorphPayroll {
         
         // Accumulate the totals for this week
         weeklyTotal.hoursWorked += log.hoursWorked;
-        weeklyTotal.lates += log.lates;
         weeklyTotal.overTime += log.overTime;
         
 
@@ -377,7 +376,7 @@ public class MotorphPayroll {
     }
     
     // Function to print caculate and print salary details
-    static void caculatePrintSalary() {
+    static void caculateAndPrintSalary() {
         
         // Date formatter for printing in the console
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
@@ -409,18 +408,26 @@ public class MotorphPayroll {
                 double tax = calculateWithholdingTax(weeklyEarnings);
                 
                 // Calculate the net pay within the week by subtracting first the gross week pay by sss, pagibig, and philhealth and subtract the tax.
-                double netWeekPay = (grossWeekPay - sss - pagIbig - philHealth) - tax;
+                double netWeekPay = grossWeekPay - (sss + pagIbig + philHealth + tax);
 
                 // Print all the necesssary information in the console
                 
                 // Date formatter is used to print in MMMM DD, YYYY format
                 System.out.println("Pay Period: " + week.payPeriodStart.format(dateFormatter) + " - " + week.payPeriodEnd.format(dateFormatter));
-                System.out.println("Gross Pay: " + String.format("%.2f", grossWeekPay)); // Format to 2 decimal places only
-                System.out.println("Deductions");
+                System.out.println("- Weekly Earning -");
+                System.out.println("Hours Worked: " + String.format("%.2f",week.hoursWorked));
+                System.out.println("Hourly Rate: " + String.format("%.2f", data.hourlyRate));
+                System.out.println("Overe Time: " + String.format("%.2f", week.overTime));
+                System.out.println("- Weekly Allowances -");
+                System.out.println("Rice Subsidy: " + String.format("%.2f", data.riceSubsidy / 4));
+                System.out.println("Phone Allowance: " + String.format("%.2f", data.phoneAllowance / 4));
+                System.out.println("Clothing Allowance: " + String.format("%.2f", data.clothingAllowance / 4));
+                System.out.println("- Deductions -");
                 System.out.println("SSS: " + String.format("%.2f", sss)); // Format to 2 decimal places only
                 System.out.println("PAGIbig: " + String.format("%.2f", pagIbig)); // Format to 2 decimal places only
                 System.out.println("Phil Health: " + String.format("%.2f", philHealth)); // Format to 2 decimal places only
                 System.out.println("Withholding Tax: " + String.format("%.2f", tax)); // Format to 2 decimal places only
+                System.out.println("Gross Pay: " + String.format("%.2f", grossWeekPay)); // Format to 2 decimal places only
                 System.out.println("Net Pay: " + String.format("%.2f", netWeekPay)); // Format to 2 decimal places only
                 System.out.println("---------------");
             });
@@ -487,7 +494,7 @@ public class MotorphPayroll {
             calculateWeeklyTotals(timeSheet);
             
             //  Print caculate and print salary details
-            caculatePrintSalary();
+            caculateAndPrintSalary();
             
                 System.out.print("Do you want to view other employee's salary? (Y/N): ");
                 String userResponse = scanner.nextLine().trim(); // Trim to remove unnecessary spaces
