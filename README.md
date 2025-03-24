@@ -11,7 +11,7 @@ The MotorPH Payroll System is a Java-based application designed to calculate and
 - 💰 Salary Calculation: Computes weekly earnings based on hours worked and hourly rates
 - ⏱️ Overtime Management: Calculates overtime pay with premium rates (125% of regular pay)
 - 🎁 Allowance Distribution: Prorates monthly allowances (rice subsidy, phone, clothing) to weekly amounts
-- 📑Government Deductions: Calculates mandatory contributions:
+- 📑 Government Deductions: Calculates mandatory contributions:
     - SSS (Social Security System)
     - PhilHealth
     - Pag-IBIG Fund
@@ -73,41 +73,38 @@ java com.group.motorph.payroll.MotorphPayroll
 
 ## 🖥️ Sample Output
 ```bash
--------------------------
-MotorPH Payroll System
--------------------------
-Please Enter Employee ID to Check Pay Details.
-Enter Employee ID: 10001
-
 ----------------------
 Employee Information
 ----------------------
 Employee ID: 10001
-Employee Name: Doe, John
-Birthday: 01/15/1990
+Employee Name: Garcia, Manuel III
+Birthday: 10/11/1983
 Status: Regular
-Position: Sales Manager
+Position: Chief Executive Officer
 
----------------
+-------------------------------------------------------
 Salary Details
----------------
-Pay Period: January 01, 2023 - January 07, 2023
-- Weekly Earning -
-Hours Worked: 40.00
-Hourly Rate: 625.00
-Over Time: 2.50
-- Weekly Allowances -
-Rice Subsidy: 1500.00
+-------------------------------------------------------
+Pay Period: June 03, 2024 - June 07, 2024
+--- Weekly Earning ---
+Hours Worked: 30.98
+Hourly Rate: 535.71
+Over Time: 0.00
+--- Weekly Allowances ---
+Rice Subsidy: 375.00
 Phone Allowance: 500.00
 Clothing Allowance: 250.00
-- Deductions -
-SSS: 200.00
-PAGIbig: 100.00
-Phil Health: 75.00
-Withholding Tax: 1250.00
-Gross Pay: 27750.00
-Net Pay: 26125.00
----------------
+--- Deductions ---
+SSS: 281.25
+PAGIbig: 354.46
+Phil Health: 66.46
+Withholding Tax: 2691.27
+Gross Pay: 17723.08
+Net Pay: 14329.64
+
+// Other Pay Period will be displayed
+-------------------------------------------------------
+Do you want to view other employee's salary? (Y/N): 
 ```
 
 ## 👨‍💻 Developers
